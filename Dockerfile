@@ -14,10 +14,12 @@ USER root
 ENV HOME /root
 ENV NODE_INSTALL_VERSION v0.12.7
 
-# Install node.js and upgrade npm
+# Install node.js
 RUN git clone https://github.com/creationix/nvm.git $HOME/.nvm
 RUN /bin/bash -c "source ~/.nvm/nvm.sh && nvm install $NODE_INSTALL_VERSION && \
-   nvm use ${NODE_INSTALL_VERSION} && nvm alias default $NODE_INSTALL_VERSION"
+   nvm use ${NODE_INSTALL_VERSION} && nvm alias default $NODE_INSTALL_VERSION && \
+   ln -s $HOME/.nvm/$NODE_INSTALL_VERSION/bin/node /usr/bin/node && \
+   ln -s $HOME/.nvm/$NODE_INSTALL_VERSION/bin/npm /usr/bin/npm"
 
 WORKDIR $HOME
 CMD ["bash"]
