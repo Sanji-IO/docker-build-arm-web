@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libpng-dev \
     python-software-properties \
-    git \
+    git &&\
     rm -rf /var/lib/apt/lists/* # 20150323
 
 USER root
