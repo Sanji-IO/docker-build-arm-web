@@ -8,7 +8,6 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     python-software-properties \
     git \
-    qemu-user \
     curl && \
     rm -rf /var/lib/apt/lists/* # 20150323
 
