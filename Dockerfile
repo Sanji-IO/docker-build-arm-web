@@ -7,19 +7,16 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libpng-dev \
     python-software-properties \
+    curl \
     git &&\
     rm -rf /var/lib/apt/lists/* # 20150323
 
 USER root
 ENV HOME /root
-ENV NODE_INSTALL_VERSION v0.12.7
 
 # Install node.js
-RUN git clone https://github.com/creationix/nvm.git $HOME/.nvm
-RUN /bin/bash -c "source ~/.nvm/nvm.sh && nvm install $NODE_INSTALL_VERSION && \
-   nvm use ${NODE_INSTALL_VERSION} && nvm alias default $NODE_INSTALL_VERSION && \
-   ln -s $HOME/.nvm/$NODE_INSTALL_VERSION/bin/node /usr/bin/node && \
-   ln -s $HOME/.nvm/$NODE_INSTALL_VERSION/bin/npm /usr/bin/npm"
+RUN curl -sL https://deb.nodesource.com/setup_0.12 | bash -
+RUN apt-get install -y nodejs
 
 WORKDIR $HOME
 CMD ["bash"]
